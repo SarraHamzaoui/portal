@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
-import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -10,33 +16,37 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 
-
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, MatFormFieldModule, MatButtonModule, CommonModule, MatCardModule, HttpClientModule, ReactiveFormsModule, NavBarComponent],
+  imports: [
+    FormsModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    CommonModule,
+    MatCardModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    NavBarComponent,
+  ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   email = '';
   password = '';
   loginForm: FormGroup;
   loginError: string | null = null;
-  constructor(private loginService: LoginService,
+  constructor(
+    private loginService: LoginService,
     private router: Router,
-    private fb: FormBuilder,
+    private fb: FormBuilder
   ) {
-
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
     });
-
   }
-
-
-
 
   onLogin() {
     const credentials = {
@@ -47,7 +57,14 @@ export class LoginComponent {
     this.loginService.login(credentials).subscribe(
       (response) => {
         localStorage.setItem('authToken', response.mytoken);
-        console.log('Login successful, token stored in localStorage:', response);
+        localStorage.setItem(
+          'userData',
+          JSON.stringify(this.decryptToken(response.mytoken))
+        );
+        console.log(
+          'Login successful, token stored in localStorage:',
+          response
+        );
         console.log('User role:', response.role);
         console.log('Status user:', response.status);
         this.loginError = null;
@@ -70,7 +87,23 @@ export class LoginComponent {
     );
   }
 
-
-
+  private decryptToken(token: string): any {
+    if (!token) {
+      return null;
+    }
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      return JSON.parse(jsonPayload);
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
 }
-

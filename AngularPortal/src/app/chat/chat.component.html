@@ -9,16 +9,38 @@
     <button (click)="sendMessage()">Send</button>
 </form> -->
 
-<div class="container mt-5" *ngIf="messages.length > 0">
-    <ul class="list-group">
-        <li class="list-group-item" *ngFor="let message of messages">
-            {{ message }}
-        </li>
-    </ul>
+<div class="m-2" *ngIf="messages.length > 0">
+  <ul
+    class="message-container"
+    [ngClass]="{ sender: userData.email === message.email }"
+    *ngFor="let message of messages"
+  >
+    <p class="username">
+      {{ message.username }} <span class="email">({{ message.email }})</span>
+    </p>
+    <li class="message">
+      {{ message.message }}
+    </li>
+  </ul>
+
+  <div class="message-container" *ngIf="typing">
+    <div class="message">
+      <div class="typing__dot"></div>
+      <div class="typing__dot"></div>
+      <div class="typing__dot"></div>
+    </div>
+  </div>
 </div>
 
 <form (ngSubmit)="sendMessage()" #chatForm="ngForm">
-    <input type="text" name="message" [(ngModel)]="message" class="form-control" placeholder="Enter your message"
-        required />
-    <button type="submit" class="btn btn-primary mt-2">Send</button>
+  <input
+    type="text"
+    name="message"
+    [(ngModel)]="message"
+    class="form-control"
+    placeholder="Enter your message"
+    required
+    onchange="onchange()"
+  />
+  <button type="submit" class="btn btn-primary mt-2">Send</button>
 </form>

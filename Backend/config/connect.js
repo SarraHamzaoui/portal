@@ -1,15 +1,13 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-mongoose.connect('mongodb://127.0.0.1:27017/portalDataBse')
-    .then(
-        () => {
-            console.log('connected');
-        }
-    )
-    .catch(
-        (err) => {
-            console.log(err);
-        }
-    )
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    console.log("connected");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 module.exports = mongoose;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChatService } from '../services/chat.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -8,32 +8,47 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './chat.component.html',
-  styleUrl: './chat.component.scss'
+  styleUrl: './chat.component.scss',
+  providers: [ChatService],
 })
-export class ChatComponent implements OnInit {
-
+export class ChatComponent implements OnInit, OnDestroy {
   public message: string = '';
-  public messages: string[] = [];
+  public messages: any[] = [];
+  public userData: any = JSON.parse(localStorage.getItem('userData') || '{}');
+  public typing: boolean = false;
 
-  constructor(private chatService: ChatService) {
-
-  }
+  constructor(private chatService: ChatService) {}
 
   ngOnInit(): void {
-    this.chatService.onMessage((msg: string) => {
-      this.messages.push(msg);
-    });
+    this.chatService.receiveMessage().subscribe(
+      (data) => {
+        console.log(data);
+        this.messages.push(data);
+      },
+      (error) => {
+        console.error('Error receiving message:', error);
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.chatService.disconnect();
   }
 
   public sendMessage() {
-    this.chatService.sendMessage(this.message);
-    this.messages.push(this.message);
+    const data = {
+      message: this.message,
+      username: this.userData.username,
+      email: this.userData.email,
+      role: this.userData.role,
+    };
+    this.chatService.sendMessage(data);
+    this.messages.push(data);
     this.message = '';
   }
 
-  public listMessages() {
-
+  onchange() {
+    this.typing = true;
+    this.chatService.typing();
   }
-
 }
-
