@@ -1,0 +1,60 @@
+.news-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* Permet aux éléments de passer à la ligne suivante si l'espace est insuffisant */
+    justify-content: flex-start;
+    /* Aligne les éléments à gauche */
+    gap: 20px;
+    /* Espacement entre les cartes */
+}
+
+/* Styles de chaque carte */
+.news-card {
+    width: calc(33.333% - 20px);
+    /* 3 cartes par ligne avec un espacement de 20px entre chaque */
+    max-width: 300px;
+    /* Limite la taille maximale de chaque carte */
+    margin-bottom: 20px;
+    /* Espacement en bas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Ombre légère pour la carte */
+    border-radius: 8px;
+    /* Coins arrondis */
+}
+
+/* Contenu de l'image de la carte */
+.card-image {
+    height: 150px;
+    object-fit: cover;
+    /* Assure que l'image occupe la taille spécifiée sans déformation */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+/* Contenu de la carte */
+.mat-card-content {
+    padding: 10px;
+    text-align: justify;
+}
+
+/* Footer de la carte */
+.mat-card-footer {
+    padding: 10px;
+    font-size: 12px;
+    color: grey;
+}
+
+/* Titre */
+.title {
+    padding: 20px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+button {
+    font-size: 14px;
+}

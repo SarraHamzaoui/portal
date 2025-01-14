@@ -1,0 +1,35 @@
+<mat-card class="title">
+    <b><span>Manage News</span></b>
+</mat-card>
+<hr>
+
+<div>
+    <button class="btn btn-success" (click)="openCreateNewDialog()">Add News</button>
+</div>
+
+
+
+<div class="news-container">
+    @for (item of dataSource ; track $index) {
+    <mat-card class="news-card card-class">
+        <mat-card-header>
+            <mat-card-title><b>{{ item.title }}</b></mat-card-title>
+            <mat-card-subtitle id="subtitle"> Published by: {{ item.author.username }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="item.image" alt="Actuality Image" class="card-image" />
+        <mat-card-content>
+            <p>{{ item.description }}</p>
+        </mat-card-content>
+        <mat-card-footer>
+            <small class="published-on">Published on: {{ item.createdAt | date:'longDate' }}</small>
+            <br>
+            <!-- <button mat-flat-button (click)="openEditDialog(row)">Edit</button> -->
+            <div class="actions">
+                <button mat-raised-button color="primary" (click)="openEditDialog(item)">Edit</button>
+                <button mat-raised-button color="warn" (click)="deleteNews(item._id)">Delete</button>
+
+            </div>
+        </mat-card-footer>
+    </mat-card>
+    }
+</div>

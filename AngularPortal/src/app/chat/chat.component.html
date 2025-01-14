@@ -1,0 +1,24 @@
+<!-- <div class="container mt-5" *ngIf="messages">
+    <ul *ngFor="let message of messages" class="list-group">
+        <li class="list-group-item">{{message}}</li>
+    </ul>
+</div>
+
+<form>
+    <input type="text" name="message" [(ngModel)]="message">
+    <button (click)="sendMessage()">Send</button>
+</form> -->
+
+<div class="container mt-5" *ngIf="messages.length > 0">
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let message of messages">
+            {{ message }}
+        </li>
+    </ul>
+</div>
+
+<form (ngSubmit)="sendMessage()" #chatForm="ngForm">
+    <input type="text" name="message" [(ngModel)]="message" class="form-control" placeholder="Enter your message"
+        required />
+    <button type="submit" class="btn btn-primary mt-2">Send</button>
+</form>

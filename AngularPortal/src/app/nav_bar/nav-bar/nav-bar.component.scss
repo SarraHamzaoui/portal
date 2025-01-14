@@ -1,0 +1,53 @@
+.navClass {
+    height: 75px;
+    // background-color: #2d84e7;
+    display: flex;
+    align-items: center;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+    justify-content: space-between;
+}
+
+#logo {
+    width: 180px;
+    margin-left: 73px;
+    margin-top: 10px;
+
+}
+
+#logo img {
+    width: 100%;
+    height: auto;
+
+}
+
+#slogan {
+    margin-top: 10px;
+    margin-right: 30px;
+    width: 300px;
+    font-family: "Noto Sans Hebrew", sans-serif;
+    animation: glowing 1.5s ease-in-out infinite;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes glowing {
+    0% {
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.5);
+    }
+
+    50% {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.7);
+    }
+
+    100% {
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.5);
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: flex-end;
+}

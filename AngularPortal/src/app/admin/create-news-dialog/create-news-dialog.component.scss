@@ -1,0 +1,19 @@
+.file-label {
+    display: inline-block;
+    margin-top: 1rem;
+    cursor: pointer;
+    color: #1976d2;
+}
+
+.file-input {
+    display: none;
+    /* Masque l'input natif */
+}
+
+.image-preview {
+    margin-top: 1rem;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}

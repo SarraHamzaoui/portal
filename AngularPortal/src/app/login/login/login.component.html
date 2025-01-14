@@ -1,0 +1,37 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+</style>
+<app-nav-bar></app-nav-bar>
+
+<div class="login">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="box">
+            <div class="text">
+                <p><b>Login</b></p>
+            </div>
+
+            <div *ngIf="loginError" class="error-message">
+                <small>{{ loginError }}</small>
+            </div>
+
+            <label for="email">Email</label>
+            <input type="email" formControlName="email" name="email" id="email" />
+            <div>
+                @if(loginForm.get('email')?.errors?.['required']&& loginForm.get('email')?.touched){
+                <small>Email is required.</small>
+                }
+            </div>
+
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" id="password" name="password" />
+            <div>
+                @if(loginForm.get('password')?.invalid && loginForm.get('password')?.touched){
+                @if(loginForm.get('password')?.errors?.['required']){
+                <small>Password is required.</small>
+                }
+                }
+            </div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+</div>

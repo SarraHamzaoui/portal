@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Create News</h2>
+<form [formGroup]="newsForm" (ngSubmit)="onFormSubmit()">
+    <mat-dialog-content>
+        <div class="row content">
+            <!-- Champ Title -->
+            <mat-form-field appearance="outline">
+                <mat-label>Title</mat-label>
+                <input matInput type="text" formControlName="title" />
+            </mat-form-field>
+
+            <!-- Champ Description -->
+            <mat-form-field appearance="outline">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+
+            <!-- Champ pour l'author (caché) -->
+            <input type="hidden" formControlName="author" />
+
+            <!-- Champ pour l'image (sans mat-form-field) -->
+            <div class="image-upload">
+                <label for="imageUpload" class="file-label">Upload Image</label>
+                <input id="imageUpload" type="file" (change)="onFileSelected($event)" class="file-input" />
+                <img *ngIf="selectedImage" [src]="selectedImage" alt="Preview" class="image-preview" />
+            </div>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-flat-button color="primary" type="submit">Save</button>
+    </mat-dialog-actions>
+</form>

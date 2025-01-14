@@ -1,0 +1,30 @@
+<!-- <app-nav-bar [backgroundColor]="'#f1f1f1'"></app-nav-bar>
+
+<div class="sidebar">
+    <ul>
+        <li><a (click)="navigateToPage('User Management')"><span class="txtColor">User Management</span></a></li>
+        <li><a (click)="navigateToPage('News Management')"><span class="txtColor">News Management</span></a></li>
+        <li><a (click)="navigateToPage('Real-Time Chat')"><span class="txtColor">Real-Time Chat</span></a></li>
+        <li><a (click)="navigateToPage('Send Email')"><span class="txtColor">Send Email</span></a></li>
+
+    </ul>
+</div>
+<router-outlet></router-outlet> -->
+
+
+
+<app-nav-bar [backgroundColor]="'#f1f1f1'"></app-nav-bar>
+
+<div class="dashboard-container">
+    <div class="sidebar">
+        <ul>
+            <li><a (click)="navigateToPage('User Management')"><span class="txtColor">User Management</span></a></li>
+            <li><a (click)="navigateToPage('News Management')"><span class="txtColor">News Management</span></a></li>
+            <li><a (click)="navigateToPage('Real-Time Chat')"><span class="txtColor">Real-Time Chat</span></a></li>
+            <li><a (click)="navigateToPage('Send Email')"><span class="txtColor">Send Email</span></a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>
